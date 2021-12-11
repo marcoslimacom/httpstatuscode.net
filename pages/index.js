@@ -85,7 +85,7 @@ export default function Home({
           {codes2xx.map((statusCode, index) => {
             return (
               <li key={index}>
-                <a href={`/api/${statusCode.code}`}>
+                <a href={`/statuscode/${statusCode.code}`}>
                   <span>{statusCode.code}</span> {statusCode.title}
                 </a>
               </li>
@@ -109,7 +109,7 @@ export default function Home({
           {codes3xx.map((statusCode, index) => {
             return (
               <li key={index}>
-                <a href={`/api/${statusCode.code}`}>
+                <a href={`/statuscode/${statusCode.code}`}>
                   <span>{statusCode.code}</span> {statusCode.title}
                 </a>
               </li>
@@ -132,7 +132,7 @@ export default function Home({
           {codes4xx.map((statusCode, index) => {
             return (
               <li key={index}>
-                <a href={`/api/${statusCode.code}`}>
+                <a href={`/statuscode/${statusCode.code}`}>
                   <span>{statusCode.code}</span> {statusCode.title}
                 </a>
               </li>
@@ -158,7 +158,7 @@ export default function Home({
           {codes5xx.map((statusCode, index) => {
             return (
               <li key={index}>
-                <a href={`/api/${statusCode.code}`}>
+                <a href={`/statuscode/${statusCode.code}`}>
                   <span>{statusCode.code}</span> {statusCode.title}
                 </a>
               </li>
