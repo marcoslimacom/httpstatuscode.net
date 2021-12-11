@@ -2,7 +2,13 @@ import Head from 'next/head'
 import httpStatusCode from '../data/httpStatusCode'
 import styles from '../styles/Home.module.css'
 
-export default function Home() {
+export default function Home({
+  codes1xx,
+  codes2xx,
+  codes3xx,
+  codes4xx,
+  codes5xx,
+}) {
   return (
     <div className={styles.container}>
       <Head>
@@ -58,17 +64,14 @@ export default function Home() {
               except under experimental conditions.
             </p>
           </li>
-          {Object.keys(httpStatusCode).map((key, index) => {
-            const statusCode = httpStatusCode[key];
-            if (key.charAt(0) === "1") {
-              return (
-                <li>
-                  <a href={`/api/${key}`}>
-                    <span>{key}</span> {statusCode.title}
-                  </a>
-                </li>
-              );
-            }
+          {codes1xx.map((statusCode, index) => {
+            return (
+              <li key={index}>
+                <a href={`/statuscode/${statusCode.code}`}>
+                  <span>{statusCode.code}</span> {statusCode.title}
+                </a>
+              </li>
+            );
           })}
         </ul>
         <ul>
@@ -79,17 +82,14 @@ export default function Home() {
               client was received, understood, and accepted.
             </p>
           </li>
-          {Object.keys(httpStatusCode).map((key, index) => {
-            const statusCode = httpStatusCode[key];
-            if (key.charAt(0) === "2") {
-              return (
-                <li>
-                  <a href={`/api/${key}`}>
-                    <span>{key}</span> {statusCode.title}
-                  </a>
-                </li>
-              );
-            }
+          {codes2xx.map((statusCode, index) => {
+            return (
+              <li key={index}>
+                <a href={`/api/${statusCode.code}`}>
+                  <span>{statusCode.code}</span> {statusCode.title}
+                </a>
+              </li>
+            );
           })}
         </ul>
         <ul>
@@ -106,17 +106,14 @@ export default function Home() {
               redirects.
             </p>
           </li>
-          {Object.keys(httpStatusCode).map((key, index) => {
-            const statusCode = httpStatusCode[key];
-            if (key.charAt(0) === "3") {
-              return (
-                <li>
-                  <a href={`/api/${key}`}>
-                    <span>{key}</span> {statusCode.title}
-                  </a>
-                </li>
-              );
-            }
+          {codes3xx.map((statusCode, index) => {
+            return (
+              <li key={index}>
+                <a href={`/api/${statusCode.code}`}>
+                  <span>{statusCode.code}</span> {statusCode.title}
+                </a>
+              </li>
+            );
           })}
         </ul>
         <ul>
@@ -132,17 +129,14 @@ export default function Home() {
               included entity to the user.
             </p>
           </li>
-          {Object.keys(httpStatusCode).map((key, index) => {
-            const statusCode = httpStatusCode[key];
-            if (key.charAt(0) === "4") {
-              return (
-                <li>
-                  <a href={`/api/${key}`}>
-                    <span>{key}</span> {statusCode.title}
-                  </a>
-                </li>
-              );
-            }
+          {codes4xx.map((statusCode, index) => {
+            return (
+              <li key={index}>
+                <a href={`/api/${statusCode.code}`}>
+                  <span>{statusCode.code}</span> {statusCode.title}
+                </a>
+              </li>
+            );
           })}
         </ul>
         <ul>
@@ -161,20 +155,61 @@ export default function Home() {
               response codes are applicable to any request method.
             </p>
           </li>
-          {Object.keys(httpStatusCode).map((key, index) => {
-            const statusCode = httpStatusCode[key];
-            if (key.charAt(0) === "5") {
-              return (
-                <li>
-                  <a href={`/api/${key}`}>
-                    <span>{key}</span> {statusCode.title}
-                  </a>
-                </li>
-              );
-            }
+          {codes5xx.map((statusCode, index) => {
+            return (
+              <li key={index}>
+                <a href={`/api/${statusCode.code}`}>
+                  <span>{statusCode.code}</span> {statusCode.title}
+                </a>
+              </li>
+            );
           })}
         </ul>
       </div>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const codes1xx = [];
+  const codes2xx = [];
+  const codes3xx = [];
+  const codes4xx = [];
+  const codes5xx = [];
+  Object.keys(httpStatusCode).forEach((key, index) => {
+    const statusCode = httpStatusCode[key];
+    const initialCode = key.toString().charAt(0);
+
+    switch (initialCode) {
+      case "1":
+        codes1xx.push({ code: key, title: statusCode.title });
+        break;
+
+      case "2":
+        codes2xx.push({ code: key, title: statusCode.title });
+        break;
+
+      case "3":
+        codes3xx.push({ code: key, title: statusCode.title });
+        break;
+
+      case "4":
+        codes4xx.push({ code: key, title: statusCode.title });
+        break;
+    
+      default:
+        codes5xx.push({ code: key, title: statusCode.title });
+        break;
+    }
+  })
+
+  return {
+    props: {
+      codes1xx,
+      codes2xx,
+      codes3xx,
+      codes4xx,
+      codes5xx
+    },
+  };
 }
