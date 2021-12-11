@@ -7,24 +7,24 @@ function Code({ statusCode }) {
     <div className={styles.container}>
       <Head>
         <title>
-          {statusCode.code} {statusCode.title} - HTTP Status Code
+          {statusCode?.code} {statusCode?.title} - HTTP Status Code
         </title>
         <meta
           name="description"
-          content={`${statusCode.code} ${
-            statusCode.title
-          } - ${statusCode.description.substring(200, 0)}`}
+          content={`${statusCode?.code} ${
+            statusCode?.title
+          } - ${statusCode?.description?.substring(200, 0)}`}
         />
       </Head>
 
       <div className={styles.header}>
-        <a href={`/api/${statusCode.code}`}>
-          <h1 id="http-status-codes">{statusCode.code}</h1>
-          <h2 className={styles.slogan}>{statusCode.title}</h2>
+        <a href={`/api/${statusCode?.code}`}>
+          <h1 id="http-status-codes">{statusCode?.code}</h1>
+          <h2 className={styles.slogan}>{statusCode?.title}</h2>
         </a>
       </div>
       <div className={styles.columns}>
-        <p dangerouslySetInnerHTML={{ __html: statusCode.description }}></p>
+        <p dangerouslySetInnerHTML={{ __html: statusCode?.description }}></p>
       </div>
       <div className={styles.columns}>
       </div>
