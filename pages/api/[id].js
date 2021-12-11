@@ -5,7 +5,7 @@ export default function handler(req, res) {
   const statusCode = httpStatusCode[req.query.id];
   if (statusCode) {
     res.status(200).json({
-      statusCode: req.query.id,
+      code: req.query.id,
       title: statusCode.title,
       description: statusCode.description.replace(/(<([^>]+)>)/gi, "")
     });
